@@ -144,12 +144,15 @@ class CodiceFiscale {
   }
   omocodie () {
     const results = []
-    let lastOmocode = (this.code = this.code.slice(0, 15))
-    for (let i = this.code.length - 1; i >= 0; i = i - 1) {
-      const char = this.code[i]
-      if (char.match(/\d/) !== null) {
-        lastOmocode = `${lastOmocode.substr(0, i)}${OMOCODIA_TABLE[char]}${lastOmocode.substr(i + 1)}`
-        results.push(lastOmocode + CodiceFiscale.getCheckCode(lastOmocode))
+    const baseCode = this.code.slice(0, 15)
+    for (let j = 1; j <= baseCode.length; j++) {
+      let lastOmocode = baseCode
+      for (let i = baseCode.length - j; i >= 0; i = i - 1) {
+        const char = baseCode[i]
+        if (char.match(/\d/) !== null) {
+          lastOmocode = `${lastOmocode.substr(0, i)}${OMOCODIA_TABLE[char]}${lastOmocode.substr(i + 1)}`
+          results.push(lastOmocode + CodiceFiscale.getCheckCode(lastOmocode))
+        }
       }
     }
     return results

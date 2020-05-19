@@ -207,6 +207,7 @@ describe('CodiceFiscale.check', () => {
   test('funziona anche in caso di omocodie', () => {
     expect(CodiceFiscale.check('BNZVCN32S10E57PV')).toBe(true)
     expect(CodiceFiscale.check('BNZVCNPNSMLERTPX')).toBe(true)
+    expect(CodiceFiscale.check('BNZVCNPNSMLERT3B')).toBe(true)
   })
 })
 
@@ -217,7 +218,7 @@ describe('CodiceFiscale.getOmocodie', () => {
 
   test('calcola le omocodie dato un codice fiscale', () => {
     expect(CodiceFiscale.getOmocodie('BNZVCN32S10E573Z'))
-     .toEqual(expect.arrayContaining(['BNZVCN32S10E57PV', 'BNZVCNPNSMLERTPX']))
+      .toEqual(expect.arrayContaining(['BNZVCN32S10E57PV', 'BNZVCNPNSMLERTPX', 'BNZVCNPNSMLERT3B']))
   })
 })
 
